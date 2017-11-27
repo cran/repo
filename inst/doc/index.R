@@ -7,17 +7,19 @@ library(repo)
 rp <- repo_open(tempdir(), force=T)
 
 ## ------------------------------------------------------------------------
-rp$attach("index.Rmd", "Source code for Repo vignette", replace=T)
+rp$attach("index.Rmd", "Source code for Repo vignette")
 rp$options(src="index.Rmd")
 
-## ------------------------------------------------------------------------
-myiris <- scale(as.matrix(iris[,1:4]))
+## ---- eval=F-------------------------------------------------------------
+#  myiris <- scale(as.matrix(iris[,1:4]))
 
-## ------------------------------------------------------------------------
-rp$put(myiris)
+## ---- eval=F-------------------------------------------------------------
+#  rp$put(myiris)
 
 ## ------------------------------------------------------------------------
 ## chunk "myiris" {
+myiris <- scale(as.matrix(iris[,1:4]))
+
 rp$put(
     obj = myiris,
     name = "myiris", 
@@ -26,8 +28,7 @@ rp$put(
         "Normalization is made with the scale function",
         "with default parameters."
     ),
-    tags = c("dataset", "iris", "repodemo"),
-    replace=T
+    tags = c("dataset", "iris", "repodemo")
 )
 ## }
 
@@ -85,7 +86,7 @@ rp$put(res, "iris_cluVsSpecies",
          paste("Contingency table of the kmeans clustering versus the",
                "original labels of the Iris dataset."),
          c("result", "iris","validation", "clustering", "repodemo", "hide"),
-         src="index.Rmd", depends=c("myiris", "irisLabels", "iris_5clu"), replace=T)
+         src="index.Rmd", depends=c("myiris", "irisLabels", "iris_5clu"))
 
 ## ------------------------------------------------------------------------
 rp$info()
