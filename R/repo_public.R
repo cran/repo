@@ -490,7 +490,6 @@ print.repo <- function(x, tags=NULL, tagfun="OR",
 #' @param find Character to match any filed (see Details).
 #' @param all Show also items tagged with "hide".
 #' @param show Select columns to show.
-#' @param ... Further arguments passed to or from other methods
 #' @return Used for side effects.
 #' @details The \code{tagfun} param specifies how to combine multiple
 #' tags when matching items. It can be either a character or a
@@ -674,9 +673,9 @@ repo_info <- function(name = NULL, tags = NULL)
                       paste(entries[[e]]$dims, collapse="x"),
                       as.character(entries[[e]]$timestamp),
                       hmnRead(entries[[e]]$size),
-                      paste(entries[[e]]$source, collapse=", "),
-                      att, entries[[e]]$dump, entries[[e]]
-                      $checksum, url)
+                      paste(entries[[e]]$source, collapse=", "), att,
+                      file.path(get("root",thisEnv), entries[[e]]$dump),
+                      entries[[e]] $checksum, url)
             cat(paste0(format(labels, width=maxlen+1), vals, "\n"), sep="")
             cat("\n")
         }
